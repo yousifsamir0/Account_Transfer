@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  django:
+    build:
+      context: ./back_end
+      dockerfile: Dockerfile-django
+    volumes:
+      - ./back_end:/app
+    ports:
+      - "8000:8000"
+    # env_file:
+    #   - .env
+
+  react:
+    build:
+      context: ./front_end
+      dockerfile: Dockerfile-react
+    volumes:
+      - ./front_end:/app
+      - /app/node_modules/
+    ports:
+      - "3001:3001"
+    stdin_open: true
+    tty: true
